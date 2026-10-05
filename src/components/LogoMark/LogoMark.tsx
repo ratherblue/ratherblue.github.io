@@ -76,12 +76,19 @@ export default function LogoMark({ className }: { className?: string }) {
       </defs>
       <circle r="200" fill="url(#logo-glow)" />
       {/* Outer ring: turns clockwise. */}
-      <g className={styles.turn} style={clockwise}>
-        <circle className={styles.ring} r="430" stroke="#2F5F98" strokeWidth="2.5" strokeDasharray="8 7" />
-        <path d="M167 -296 A340 340 0 0 1 -165 297" stroke="#24589A" strokeWidth="13" />
-      </g>
-      {/* Inner ring: turns counter-clockwise. */}
+      <circle
+        className={`${styles.turn} ${styles.ring}`}
+        style={clockwise}
+        r="430"
+        stroke="#2F5F98"
+        strokeWidth="2.5"
+        strokeDasharray="8 7"
+      />
+      {/* Arcs and middle ring: turn counter-clockwise. */}
       <g className={styles.turn} style={counterClockwise}>
+        {/* Invisible, but it centres the group's box on the logo so the group turns around the middle. */}
+        <circle r="340" />
+        <path d="M167 -296 A340 340 0 0 1 -165 297" stroke="#24589A" strokeWidth="13" />
         <circle r="249" stroke="#6E7F96" strokeWidth="2.5" />
         <path d="M-128 -213 A249 249 0 0 0 -209 136" stroke="#5AAEF0" strokeWidth="3" />
       </g>
