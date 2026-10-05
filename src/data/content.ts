@@ -102,7 +102,8 @@ export const projects: Project[] = [
   {
     idx: '01.3',
     name: 'Nullwave',
-    description: 'Claude design POC, just an homage to the old flash sites popular in the early 200s',
+    description:
+      'Claude design POC. An homage to the old flash sites popular in the early 2000s. (Kai Morrow is a generated name)',
     stack: ['Astro'],
     url: 'https://ratherblue.com/nullwave/',
     status: 'live',
