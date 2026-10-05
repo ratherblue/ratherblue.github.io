@@ -95,7 +95,7 @@ export default function LogoMark({ className }: { className?: string }) {
       <circle r="129" fill="url(#logo-core)" stroke="#4A88CC" strokeWidth="2.5" />
       {/* The crosshair sits over the core but turns with the outer ring. */}
       <path
-        className={`${styles.turn} ${styles.crosshair}`}
+        className={styles.turn}
         style={clockwise}
         d="M-249 0H249M0 -430V430"
         stroke="#3E6EA6"
