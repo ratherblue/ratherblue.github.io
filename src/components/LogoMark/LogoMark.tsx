@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type AnimationEvent } from 'react'
+import { useEffect, useRef, useState, type AnimationEvent, type TransitionEvent } from 'react'
 import { CIRCUIT_HIT } from '../GridSweep/GridSweep'
 import styles from './LogoMark.module.scss'
 
@@ -8,16 +8,21 @@ const TURN = 45
 let savedAngle = 0
 
 // The large home page logo, inlined from public/logo.svg so its parts can animate. When the backdrop's
-// circuit pulse runs into it, it powers up: it turns a little further while it glows and the outer ring charges.
+// circuit pulse runs into it, it powers up: its rings turn a little further, in opposite
+// directions, while it glows and the outer ring charges.
 export default function LogoMark({ className }: { className?: string }) {
   const ref = useRef<SVGSVGElement>(null)
   const [angle, setAngle] = useState(savedAngle)
   const [powered, setPowered] = useState(false)
+  // Hits while the logo is still turning are ignored: retargeting the transition mid-turn makes it stutter.
+  const turning = useRef(false)
 
   useEffect(() => {
     const svg = ref.current
     if (!svg) return
     const powerUp = () => {
+      if (turning.current) return
+      turning.current = true
       savedAngle += TURN
       setAngle(savedAngle)
       setPowered(true)
@@ -31,6 +36,13 @@ export default function LogoMark({ className }: { className?: string }) {
     if (e.target === e.currentTarget) setPowered(false)
   }
 
+  // Both rings turn for the same time, so the first to finish ends the turn.
+  const onTransitionEnd = (e: TransitionEvent<SVGSVGElement>) => {
+    if (e.propertyName === 'transform') turning.current = false
+  }
+  const clockwise = { transform: `rotate(${angle}deg)` }
+  const counterClockwise = { transform: `rotate(${-angle}deg)` }
+
   return (
     <svg
       ref={ref}
@@ -41,8 +53,8 @@ export default function LogoMark({ className }: { className?: string }) {
       aria-label="ratherblue logo"
       data-circuit-target
       data-powered={powered}
-      style={{ transform: `rotate(${angle}deg)` }}
       onAnimationEnd={onAnimationEnd}
+      onTransitionEnd={onTransitionEnd}
     >
       <defs>
         <radialGradient
@@ -62,14 +74,22 @@ export default function LogoMark({ className }: { className?: string }) {
           <stop offset="1" stopColor="#3B7BC8" stopOpacity="0" />
         </radialGradient>
       </defs>
-      <circle className={styles.ring} r="430" stroke="#2F5F98" strokeWidth="2.5" strokeDasharray="8 7" />
       <circle r="200" fill="url(#logo-glow)" />
-      <path d="M167 -296 A340 340 0 0 1 -165 297" stroke="#24589A" strokeWidth="13" />
-      <circle r="249" stroke="#6E7F96" strokeWidth="2.5" />
-      <path d="M-128 -213 A249 249 0 0 0 -209 136" stroke="#5AAEF0" strokeWidth="3" />
+      {/* Outer ring: turns clockwise. */}
+      <g className={styles.turn} style={clockwise}>
+        <circle className={styles.ring} r="430" stroke="#2F5F98" strokeWidth="2.5" strokeDasharray="8 7" />
+        <path d="M167 -296 A340 340 0 0 1 -165 297" stroke="#24589A" strokeWidth="13" />
+      </g>
+      {/* Inner ring: turns counter-clockwise. */}
+      <g className={styles.turn} style={counterClockwise}>
+        <circle r="249" stroke="#6E7F96" strokeWidth="2.5" />
+        <path d="M-128 -213 A249 249 0 0 0 -209 136" stroke="#5AAEF0" strokeWidth="3" />
+      </g>
       <circle r="129" fill="url(#logo-core)" stroke="#4A88CC" strokeWidth="2.5" />
+      {/* The crosshair sits over the core but turns with the outer ring. */}
       <path
-        className={styles.crosshair}
+        className={`${styles.turn} ${styles.crosshair}`}
+        style={clockwise}
         d="M-249 0H249M0 -430V430"
         stroke="#3E6EA6"
         strokeWidth="2"

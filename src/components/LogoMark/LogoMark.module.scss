@@ -1,10 +1,16 @@
 // Power-up sequence, played while data-powered is true: the logo glows briefly and the outer ring lights up.
-// The turn itself is a transition on the rotation LogoMark sets, so it eases to each new angle and stays there.
+// The turns are transitions on the rotations LogoMark sets, so the rings ease to each new angle and stay there.
 $duration: 3s;
 
 .root {
   overflow: visible;
-  transition: transform 4s ease-in-out;
+
+  // Each turning part is centred on the logo, so its own box centre is the logo's centre.
+  .turn {
+    transform-box: fill-box;
+    transform-origin: center;
+    transition: transform 4s ease-in-out;
+  }
 
   &[data-powered='true'] {
     animation: halo $duration ease-out;
