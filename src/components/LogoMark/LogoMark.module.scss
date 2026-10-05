@@ -1,9 +1,13 @@
 // Power-up sequence, played while data-powered is true: the logo glows briefly and the outer ring lights up.
 // The turns are transitions on the rotations LogoMark sets, so the rings ease to each new angle and stay there.
+@use '../../styles' as *;
+
 $duration: 3s;
 
 .root {
   overflow: visible;
+  border-radius: 50%;
+  @include frosted;
 
   // Each turning part is centred on the logo, so its own box centre is the logo's centre.
   .turn {

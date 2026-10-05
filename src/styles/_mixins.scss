@@ -23,3 +23,9 @@
   font-family: var(--font-mono);
   font-size: $size;
 }
+
+// Light frosted backing that keeps content legible over the home page's backdrop animation.
+@mixin frosted {
+  background: color-mix(in srgb, var(--bg) 35%, transparent);
+  backdrop-filter: blur(4px);
+}

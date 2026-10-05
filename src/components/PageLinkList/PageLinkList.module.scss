@@ -5,9 +5,7 @@
   padding: 0;
   list-style: none;
   border-top: 1px solid var(--border);
-  // A light frosted backing so the links stay legible over the backdrop animation.
-  background: color-mix(in srgb, var(--bg) 35%, transparent);
-  backdrop-filter: blur(4px);
+  @include frosted;
 }
 
 .row {
