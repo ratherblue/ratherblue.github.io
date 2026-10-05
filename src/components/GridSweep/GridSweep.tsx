@@ -19,6 +19,9 @@ const FORK_STRENGTH = 0.6
 // A fork runs for this many cells (inclusive range) before dying out.
 const FORK_LENGTH = [3, 8]
 
+// Fired on any `[data-circuit-target]` element when a strand's head enters the circle inscribed in its box.
+export const CIRCUIT_HIT = 'circuit-hit'
+
 type Point = { x: number; y: number }
 // One strand of the pulse. `delay` is how far, in px, the pulse travels before this strand starts.
 type Bolt = { points: Point[]; delay: number; strength: number }
@@ -109,6 +112,15 @@ export default function GridSweep({ className }: { className?: string }) {
       return `hsl(${mix[0]} ${mix[1]}% ${mix[2]}% / ${t ** 1.6 * strength})`
     }
 
+    // The point `d` px along a strand. Each segment is one cell long.
+    const pointAt = (points: Point[], d: number): Point => {
+      const i = Math.min(Math.floor(d / CELL), points.length - 2)
+      const f = (d - i * CELL) / CELL
+      const a = points[i]
+      const b = points[i + 1]
+      return { x: a.x + (b.x - a.x) * f, y: a.y + (b.y - a.y) * f }
+    }
+
     const drawBolt = ({ points, delay, strength }: Bolt, elapsed: number) => {
       const head = elapsed * SPEED - delay
       const tail = head - TRAIL
@@ -117,14 +129,8 @@ export default function GridSweep({ className }: { className?: string }) {
         const from = Math.max(tail, i * CELL)
         const to = Math.min(head, (i + 1) * CELL)
         if (from >= to) continue
-        const a = points[i]
-        const b = points[i + 1]
-        const at = (d: number) => {
-          const f = (d - i * CELL) / CELL
-          return { x: a.x + (b.x - a.x) * f, y: a.y + (b.y - a.y) * f }
-        }
-        const p = at(from)
-        const q = at(to)
+        const p = pointAt(points, from)
+        const q = pointAt(points, to)
         const gradient = ctx.createLinearGradient(p.x, p.y, q.x, q.y)
         gradient.addColorStop(0, colorAt((from - tail) / TRAIL, strength))
         gradient.addColorStop(1, colorAt((to - tail) / TRAIL, strength))
@@ -134,6 +140,30 @@ export default function GridSweep({ className }: { className?: string }) {
         ctx.lineTo(q.x, q.y)
         ctx.stroke()
       }
+    }
+
+    // Each strand can set off each target once per pulse.
+    let hits = new Set<string>()
+    const hitTest = (bolts: Bolt[], elapsed: number) => {
+      const targets = document.querySelectorAll<HTMLElement>('[data-circuit-target]')
+      if (!targets.length) return
+      const origin = canvas.getBoundingClientRect()
+      bolts.forEach(({ points, delay }, b) => {
+        const head = elapsed * SPEED - delay
+        if (points.length < 2 || head < 0 || head > (points.length - 1) * CELL) return
+        const p = pointAt(points, head)
+        targets.forEach((target, t) => {
+          const key = `${b}:${t}`
+          if (hits.has(key)) return
+          const box = target.getBoundingClientRect()
+          const r = box.width / 2
+          const dx = p.x - (box.left - origin.left + r)
+          const dy = p.y - (box.top - origin.top + box.height / 2)
+          if (dx * dx + dy * dy > r * r) return
+          hits.add(key)
+          target.dispatchEvent(new CustomEvent(CIRCUIT_HIT))
+        })
+      })
     }
 
     let colors = readColors()
@@ -148,6 +178,7 @@ export default function GridSweep({ className }: { className?: string }) {
         elapsed = 0
         bolts = strike(width, height)
         colors = readColors()
+        hits = new Set()
       }
 
       ctx.clearRect(0, 0, width, height)
@@ -157,6 +188,7 @@ export default function GridSweep({ className }: { className?: string }) {
       ctx.shadowBlur = GLOW * (0.8 + Math.random() * 0.4)
       ctx.shadowColor = colorAt(1)
       for (const bolt of bolts) drawBolt(bolt, elapsed)
+      hitTest(bolts, elapsed)
     }
     frame = requestAnimationFrame(draw)
 

@@ -1,3 +1,4 @@
+import LogoMark from '../../components/LogoMark/LogoMark'
 import PageLinkList from '../../components/PageLinkList/PageLinkList'
 import { pages } from '../../data/content'
 import styles from './HomePage.module.scss'
@@ -10,7 +11,7 @@ export default function HomePage() {
         <PageLinkList links={pages} />
       </div>
       <div className={styles.mark}>
-        <img src="/logo.svg" alt="ratherblue logo" />
+        <LogoMark className={styles.logo} />
       </div>
     </section>
   )

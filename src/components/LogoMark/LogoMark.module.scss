@@ -1,0 +1,58 @@
+// Power-up sequence, played while data-powered is true: the logo glows briefly and the outer ring lights up.
+// The turn itself is a transition on the rotation LogoMark sets, so it eases to each new angle and stays there.
+$duration: 3s;
+
+.root {
+  overflow: visible;
+  transition: transform 4s ease-in-out;
+
+  &[data-powered='true'] {
+    animation: halo $duration ease-out;
+
+    .ring {
+      animation: energise $duration ease-out;
+    }
+
+    .crosshair {
+      animation: flicker $duration steps(1, end);
+    }
+  }
+}
+
+@keyframes halo {
+  0% {
+    filter: drop-shadow(0 0 0 rgba(90, 174, 240, 0));
+  }
+
+  15% {
+    filter: drop-shadow(0 0 24px rgba(90, 174, 240, 0.5));
+  }
+
+  100% {
+    filter: drop-shadow(0 0 0 rgba(90, 174, 240, 0));
+  }
+}
+
+@keyframes energise {
+  0%,
+  100% {
+    stroke: #2f5f98;
+  }
+
+  15% {
+    stroke: #8cc8f5;
+  }
+}
+
+@keyframes flicker {
+  0%,
+  10%,
+  20% {
+    stroke-opacity: 0.8;
+  }
+
+  5%,
+  15% {
+    stroke-opacity: 0.2;
+  }
+}
