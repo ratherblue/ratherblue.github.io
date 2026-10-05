@@ -32,11 +32,10 @@
   }
 
   &[data-home='true'] {
-    // Sit the content 40% of the way down the spare space rather than dead centre.
     .main {
       @include from(md) {
         display: grid;
-        grid-template-rows: 2fr auto 3fr;
+        grid-template-rows: 1fr auto 3fr;
 
         > * {
           grid-row: 2;
