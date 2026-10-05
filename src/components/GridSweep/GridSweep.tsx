@@ -10,29 +10,60 @@ const TRAIL = 300
 const PAUSE = 2.5
 const LINE_WIDTH = 2
 const GLOW = 10
+// Chance that the pulse forks at each grid intersection it reaches.
+const FORK_CHANCE = 0.12
+// Forks can fork again, up to this many levels deep.
+const MAX_DEPTH = 2
+// Each level of fork is this much fainter than the one it split from.
+const FORK_STRENGTH = 0.6
+// A fork runs for this many cells (inclusive range) before dying out.
+const FORK_LENGTH = [3, 8]
 
 type Point = { x: number; y: number }
+// One strand of the pulse. `delay` is how far, in px, the pulse travels before this strand starts.
+type Bolt = { points: Point[]; delay: number; strength: number }
+type Direction = 'right' | 'up'
 // An HSL colour without alpha, read from a `--circuit-*` token such as `200 100% 80%`.
 type Hsl = [number, number, number]
 
-// A staircase along the grid lines from near the bottom-left corner to the top or right edge, one cell
-// right or up at a time. It leans toward whichever direction is behind, so it climbs roughly corner to
-// corner on any screen shape.
-function route(width: number, height: number): Point[] {
+// +0.5 centres the stroke on the 1px grid line.
+const corner = (col: number, row: number): Point => ({ x: col * CELL + 0.5, y: row * CELL + 0.5 })
+
+// Maps out one pulse: a main strand that climbs a staircase along the grid lines from near the bottom-left
+// corner to the top or right edge, one cell right or up at a time, plus the forks that split off it like
+// lightning. The main strand leans toward whichever direction is behind, so it runs roughly corner to
+// corner on any screen shape. Forks set off the other way from the split and wander from there.
+function strike(width: number, height: number): Bolt[] {
   const cols = Math.ceil(width / CELL)
   const rows = Math.floor(height / CELL)
-  let col = Math.floor(Math.random() * Math.max(1, cols / 4))
-  let row = rows
-  const points: Point[] = []
-  while (col <= cols && row >= 0) {
-    // +0.5 centres the stroke on the 1px grid line.
-    points.push({ x: col * CELL + 0.5, y: row * CELL + 0.5 })
-    const behindOnRight = col / cols < (rows - row) / rows
-    if (Math.random() < (behindOnRight ? 0.7 : 0.3)) col++
-    else row--
+  const bolts: Bolt[] = []
+
+  const grow = (col: number, row: number, delay: number, depth: number, first?: Direction) => {
+    const maxSteps =
+      depth === 0 ? Infinity : FORK_LENGTH[0] + Math.floor(Math.random() * (FORK_LENGTH[1] - FORK_LENGTH[0] + 1))
+    const points: Point[] = []
+    let next = first
+    while (col <= cols && row >= 0 && points.length <= maxSteps) {
+      points.push(corner(col, row))
+      const lean = depth === 0 ? (col / cols < (rows - row) / rows ? 0.7 : 0.3) : 0.5
+      const direction = next ?? (Math.random() < lean ? 'right' : 'up')
+      next = undefined
+      if (points.length > 1 && depth < MAX_DEPTH && Math.random() < FORK_CHANCE) {
+        grow(col, row, delay + (points.length - 1) * CELL, depth + 1, direction === 'right' ? 'up' : 'right')
+      }
+      if (direction === 'right') col++
+      else row--
+    }
+    bolts.push({ points, delay, strength: FORK_STRENGTH ** depth })
   }
-  return points
+
+  grow(Math.floor(Math.random() * Math.max(1, cols / 4)), rows, 0, 0)
+  return bolts
 }
+
+// How long a pulse lasts, in seconds, until its last strand has faded out.
+const duration = (bolts: Bolt[]) =>
+  Math.max(...bolts.map((bolt) => bolt.delay + (bolt.points.length - 1) * CELL + TRAIL)) / SPEED
 
 const parseHsl = (value: string): Hsl => {
   const [h, s, l] = value.trim().split(/\s+/).map(parseFloat)
@@ -40,7 +71,7 @@ const parseHsl = (value: string): Hsl => {
 }
 
 // A pulse of light runs along the backdrop grid's lines, climbing from the bottom left to the top right
-// like current through a circuit.
+// like current through a circuit, and forking as it goes like lightning.
 export default function GridSweep({ className }: { className?: string }) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
@@ -73,37 +104,14 @@ export default function GridSweep({ className }: { className?: string }) {
       }
     }
     // t runs from 0 at the end of the trail to 1 at the head: the colour brightens and the alpha rises.
-    const colorAt = (t: number) => {
+    const colorAt = (t: number, strength = 1) => {
       const mix = colors.tail.map((tail, i) => tail + (colors.head[i] - tail) * t)
-      return `hsl(${mix[0]} ${mix[1]}% ${mix[2]}% / ${t ** 1.6})`
+      return `hsl(${mix[0]} ${mix[1]}% ${mix[2]}% / ${t ** 1.6 * strength})`
     }
 
-    let colors = readColors()
-    let points = route(width, height)
-    let start = performance.now()
-    let frame = 0
-    const draw = (now: number) => {
-      frame = requestAnimationFrame(draw)
-      const length = (points.length - 1) * CELL
-      let elapsed = (now - start) / 1000
-      if (elapsed > (length + TRAIL) / SPEED + PAUSE) {
-        start = now
-        elapsed = 0
-        points = route(width, height)
-        colors = readColors()
-      }
-
-      ctx.clearRect(0, 0, width, height)
-      const head = elapsed * SPEED
+    const drawBolt = ({ points, delay, strength }: Bolt, elapsed: number) => {
+      const head = elapsed * SPEED - delay
       const tail = head - TRAIL
-      if (tail >= length) return
-
-      ctx.lineWidth = LINE_WIDTH
-      ctx.lineCap = 'square'
-      // A slight flicker in the glow sells the electricity.
-      ctx.shadowBlur = GLOW * (0.8 + Math.random() * 0.4)
-      ctx.shadowColor = colorAt(1)
-
       // Each segment is one cell edge, so a straight gradient across it follows the trail exactly.
       for (let i = 0; i < points.length - 1; i++) {
         const from = Math.max(tail, i * CELL)
@@ -118,14 +126,37 @@ export default function GridSweep({ className }: { className?: string }) {
         const p = at(from)
         const q = at(to)
         const gradient = ctx.createLinearGradient(p.x, p.y, q.x, q.y)
-        gradient.addColorStop(0, colorAt((from - tail) / TRAIL))
-        gradient.addColorStop(1, colorAt((to - tail) / TRAIL))
+        gradient.addColorStop(0, colorAt((from - tail) / TRAIL, strength))
+        gradient.addColorStop(1, colorAt((to - tail) / TRAIL, strength))
         ctx.strokeStyle = gradient
         ctx.beginPath()
         ctx.moveTo(p.x, p.y)
         ctx.lineTo(q.x, q.y)
         ctx.stroke()
       }
+    }
+
+    let colors = readColors()
+    let bolts = strike(width, height)
+    let start = performance.now()
+    let frame = 0
+    const draw = (now: number) => {
+      frame = requestAnimationFrame(draw)
+      let elapsed = (now - start) / 1000
+      if (elapsed > duration(bolts) + PAUSE) {
+        start = now
+        elapsed = 0
+        bolts = strike(width, height)
+        colors = readColors()
+      }
+
+      ctx.clearRect(0, 0, width, height)
+      ctx.lineWidth = LINE_WIDTH
+      ctx.lineCap = 'square'
+      // A slight flicker in the glow sells the electricity.
+      ctx.shadowBlur = GLOW * (0.8 + Math.random() * 0.4)
+      ctx.shadowColor = colorAt(1)
+      for (const bolt of bolts) drawBolt(bolt, elapsed)
     }
     frame = requestAnimationFrame(draw)
 
