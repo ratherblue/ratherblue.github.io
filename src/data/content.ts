@@ -167,22 +167,22 @@ export const legacyProjects: LegacyProject[] = [
     role: 'Implemented site design',
   }),
   legacy('Brian Church Architecture', 'brian-church-architecture', 6, {
-    year: '2013',
+    year: '2014',
     role: 'Implemented site to client expectations',
   }),
   legacy('Heart of the Swarm', 'heart-of-the-swarm', 6, {
-    year: '2012',
+    year: '2013',
     role: 'Frontend design system and implementation',
   }),
   legacy('Diablo III', 'diablo3', ['Media', 'Screenshots'], {
-    year: '2011',
+    year: '2012',
     role: 'Frontend design system and implementation',
   }),
   legacy(
     'BlizzCon',
     'blizzcon',
     ['EU regionals', 'TW regionals', 'TW regionals video archive', 'State 1', 'State 2', 'State 3'],
-    { year: '2012', role: 'Frontend design system and implementation' },
+    { year: '2011', role: 'Frontend design system and implementation' },
   ),
   legacy('StarCraft II', 'sc2', ['Game landing', 'Homepage', 'Media', 'Services landing'], {
     year: '2010',

@@ -21,6 +21,29 @@
   > * {
     position: relative;
   }
+
+  // Sits over the grid lines but under the header, page and footer.
+  > .sweep {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  &[data-home='true'] {
+    // Sit the content 40% of the way down the spare space rather than dead centre.
+    .main {
+      @include from(md) {
+        display: grid;
+        grid-template-rows: 2fr auto 3fr;
+
+        > * {
+          grid-row: 2;
+        }
+      }
+    }
+  }
 }
 
 .main {
