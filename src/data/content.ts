@@ -232,7 +232,7 @@ export const diyProjects: DiyProject[] = [
     name: 'Pantry',
     dir: 'pantry',
     writeup:
-      'Taught myself SketchUp, then handed the plans to a finish carpenter. Not pictures: Under shelf lighting, and a lot of snacks.',
+      'Taught myself SketchUp, then handed the plans to a finish carpenter. Not pictured: Under-shelf lighting, and a lot of snacks.',
     captions: ['Before', 'Design', 'Shelves in', 'After'],
     videos: ['Walkthrough'],
   },
