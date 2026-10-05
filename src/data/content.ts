@@ -211,6 +211,12 @@ export const legacyProjects: LegacyProject[] = [
     ],
     { year: '2010', role: 'Frontend design system and implementation' },
   ),
+  legacy('NetEase transition', 'netease-transition', ['Eligible realms', 'Confirm character move'], {
+    year: '2009',
+  }),
+  legacy('WoW Armory', 'wow-armory', ['Character profile'], {
+    year: '2009',
+  }),
   legacy('Warcraft.com', 'warcraft-com', ['Free trial landing'], {
     year: '2008',
     role: 'Implemented design',
