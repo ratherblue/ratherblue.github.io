@@ -1,0 +1,34 @@
+@use '../../styles' as *;
+
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 28px var(--page-pad);
+  border-top: 1px solid var(--border);
+  background: var(--chrome);
+  backdrop-filter: blur(6px);
+  font-size: 14px;
+  color: var(--muted);
+
+  @include from(sm) {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  .link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+}

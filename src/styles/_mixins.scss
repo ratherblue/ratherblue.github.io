@@ -1,0 +1,25 @@
+@use 'sass:map';
+@use 'breakpoints' as *;
+
+// Mobile-first media query. Usage: @include from(md) { ... }
+@mixin from($name) {
+  $value: map.get($breakpoints, $name);
+
+  @if not $value {
+    @error 'Unknown breakpoint "#{$name}". Expected one of: #{map.keys($breakpoints)}';
+  }
+
+  @media (min-width: $value) {
+    @content;
+  }
+}
+
+// Shared striped placeholder used behind empty thumbnails.
+@mixin stripes($size: 10px) {
+  background: repeating-linear-gradient(135deg, var(--stripe-a) 0 $size, var(--stripe-b) $size ($size * 2));
+}
+
+@mixin mono($size: 12px) {
+  font-family: var(--font-mono);
+  font-size: $size;
+}

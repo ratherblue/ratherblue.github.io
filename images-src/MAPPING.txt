@@ -1,0 +1,100 @@
+portfolio/allocate.jpg  ->  images-src/portfolio/allocate/01.jpg
+portfolio/allocate1.jpg  ->  images-src/portfolio/allocate/02.jpg
+portfolio/meadows/site.jpg  ->  images-src/portfolio/meadows/01.jpg
+portfolio/nullwave/site.jpg  ->  images-src/portfolio/nullwave/01.jpg
+portfolio/strawberries/site.jpg  ->  images-src/portfolio/strawberries/01.jpg
+legacy-portfolio/blizzcon/09162011-eu-regionals-sc2 (1).png  ->  images-src/legacy/blizzcon/01.png
+legacy-portfolio/blizzcon/09162011-tw-regionals-sc2 (1).png  ->  images-src/legacy/blizzcon/02.png
+legacy-portfolio/blizzcon/09162011-tw-regionals-sc2-video-archive (1).png  ->  images-src/legacy/blizzcon/03.png
+legacy-portfolio/blizzcon/state1.png  ->  images-src/legacy/blizzcon/04.png
+legacy-portfolio/blizzcon/state2.png  ->  images-src/legacy/blizzcon/05.png
+legacy-portfolio/blizzcon/state5.png  ->  images-src/legacy/blizzcon/06.png
+legacy-portfolio/brian-church-architecture/Screenshot 2024-06-03 at 3.40.56 PM.png  ->  images-src/legacy/brian-church-architecture/01.png
+legacy-portfolio/brian-church-architecture/Screenshot 2024-06-03 at 3.41.05 PM.png  ->  images-src/legacy/brian-church-architecture/02.png
+legacy-portfolio/brian-church-architecture/Screenshot 2024-06-03 at 3.41.25 PM.png  ->  images-src/legacy/brian-church-architecture/03.png
+legacy-portfolio/brian-church-architecture/Screenshot 2024-06-03 at 3.42.04 PM.png  ->  images-src/legacy/brian-church-architecture/04.png
+legacy-portfolio/brian-church-architecture/Screenshot 2024-06-03 at 3.42.37 PM.png  ->  images-src/legacy/brian-church-architecture/05.png
+legacy-portfolio/brian-church-architecture/Screenshot 2024-06-03 at 3.42.42 PM.png  ->  images-src/legacy/brian-church-architecture/06.png
+legacy-portfolio/cedros-collective/Screenshot 2024-06-03 at 3.31.10 PM.png  ->  images-src/legacy/cedros-collective/01.png
+legacy-portfolio/cedros-collective/Screenshot 2024-06-03 at 3.31.51 PM.png  ->  images-src/legacy/cedros-collective/02.png
+legacy-portfolio/cedros-collective/Screenshot 2024-06-03 at 3.33.16 PM.png  ->  images-src/legacy/cedros-collective/03.png
+legacy-portfolio/cedros-collective/Screenshot 2024-06-03 at 3.33.29 PM.png  ->  images-src/legacy/cedros-collective/04.png
+legacy-portfolio/diablo3/d31.png  ->  images-src/legacy/diablo3/01.png
+legacy-portfolio/diablo3/d32.png  ->  images-src/legacy/diablo3/02.png
+legacy-portfolio/fmpp/Screenshot 2024-06-03 at 3.44.58 PM.png  ->  images-src/legacy/fmpp/01.png
+legacy-portfolio/fmpp/Screenshot 2024-06-03 at 3.45.11 PM.png  ->  images-src/legacy/fmpp/02.png
+legacy-portfolio/fmpp/Screenshot 2024-06-03 at 3.45.41 PM.png  ->  images-src/legacy/fmpp/03.png
+legacy-portfolio/fmpp/Screenshot 2024-06-03 at 3.46.11 PM.png  ->  images-src/legacy/fmpp/04.png
+legacy-portfolio/freemarker/Screenshot 2024-06-03 at 3.34.43 PM.png  ->  images-src/legacy/freemarker/01.png
+legacy-portfolio/freemarker/Screenshot 2024-06-03 at 3.34.57 PM.png  ->  images-src/legacy/freemarker/02.png
+legacy-portfolio/freemarker/Screenshot 2024-06-03 at 3.35.13 PM.png  ->  images-src/legacy/freemarker/03.png
+legacy-portfolio/freemarker/Screenshot 2024-06-03 at 3.35.28 PM.png  ->  images-src/legacy/freemarker/04.png
+legacy-portfolio/freemarker/Screenshot 2024-06-03 at 3.35.37 PM.png  ->  images-src/legacy/freemarker/05.png
+legacy-portfolio/freemarker/Screenshot 2024-06-03 at 3.35.52 PM.png  ->  images-src/legacy/freemarker/06.png
+legacy-portfolio/freemarker/Screenshot 2024-06-03 at 3.36.03 PM.png  ->  images-src/legacy/freemarker/07.png
+legacy-portfolio/freemarker/Screenshot 2024-06-03 at 3.36.12 PM.png  ->  images-src/legacy/freemarker/08.png
+legacy-portfolio/heart-of-the-swarm/hots1.jpg  ->  images-src/legacy/heart-of-the-swarm/01.jpg
+legacy-portfolio/heart-of-the-swarm/hots2.jpg  ->  images-src/legacy/heart-of-the-swarm/02.jpg
+legacy-portfolio/heart-of-the-swarm/hots3.jpg  ->  images-src/legacy/heart-of-the-swarm/03.jpg
+legacy-portfolio/heart-of-the-swarm/hots4.jpg  ->  images-src/legacy/heart-of-the-swarm/04.jpg
+legacy-portfolio/heart-of-the-swarm/hots5.jpg  ->  images-src/legacy/heart-of-the-swarm/05.jpg
+legacy-portfolio/heart-of-the-swarm/hots6.jpg  ->  images-src/legacy/heart-of-the-swarm/06.jpg
+legacy-portfolio/loan-depot/2.00 Pipeline (1).png  ->  images-src/legacy/loan-depot/01.png
+legacy-portfolio/loan-depot/3.00 Overview (1).png  ->  images-src/legacy/loan-depot/02.png
+legacy-portfolio/loan-depot/7.02 Dual AUS - LPA Settings.png  ->  images-src/legacy/loan-depot/03.png
+legacy-portfolio/loan-depot/8.01 1003 - Notification.png  ->  images-src/legacy/loan-depot/04.png
+legacy-portfolio/loan-depot/9.00 Finalize - Default.png  ->  images-src/legacy/loan-depot/05.png
+legacy-portfolio/sc2/game-landing.png  ->  images-src/legacy/sc2/01.png
+legacy-portfolio/sc2/homepage.png  ->  images-src/legacy/sc2/02.png
+legacy-portfolio/sc2/media.png  ->  images-src/legacy/sc2/03.png
+legacy-portfolio/sc2/services-landing.png  ->  images-src/legacy/sc2/04.png
+legacy-portfolio/sourceability/Screenshot 2024-06-03 at 3.21.06 PM.png  ->  images-src/legacy/sourceability/01.png
+legacy-portfolio/sourceability/Screenshot 2024-06-03 at 3.24.34 PM.png  ->  images-src/legacy/sourceability/02.png
+legacy-portfolio/sourceability/Screenshot 2024-06-03 at 3.21.39 PM.png  ->  images-src/legacy/sourceability/03.png
+legacy-portfolio/sourceability/Screenshot 2024-06-03 at 3.24.49 PM.png  ->  images-src/legacy/sourceability/04.png
+legacy-portfolio/sourceability/Screenshot 2024-06-03 at 3.21.45 PM.png  ->  images-src/legacy/sourceability/05.png
+legacy-portfolio/sourceability/Screenshot 2024-06-03 at 3.24.56 PM.png  ->  images-src/legacy/sourceability/06.png
+legacy-portfolio/sourceability/Screenshot 2024-06-03 at 3.21.55 PM.png  ->  images-src/legacy/sourceability/07.png
+legacy-portfolio/sourceability/Screenshot 2024-06-03 at 3.24.05 PM.png  ->  images-src/legacy/sourceability/08.png
+legacy-portfolio/sourceability/Screenshot 2024-06-03 at 3.25.12 PM.png  ->  images-src/legacy/sourceability/09.png
+legacy-portfolio/sourceability/Screenshot 2024-06-03 at 3.25.08 PM.png  ->  images-src/legacy/sourceability/10.png
+legacy-portfolio/sourceability/Screenshot 2024-06-03 at 3.25.42 PM.png  ->  images-src/legacy/sourceability/11.png
+legacy-portfolio/sourceability/Screenshot 2024-06-03 at 3.26.03 PM.png  ->  images-src/legacy/sourceability/12.png
+legacy-portfolio/warcraft.com/site.jpg  ->  images-src/legacy/warcraft-com/01.jpg
+legacy-portfolio/wow/blood-elf.jpg  ->  images-src/legacy/wow/01.jpg
+legacy-portfolio/wow/death-knight.jpg  ->  images-src/legacy/wow/02.jpg
+legacy-portfolio/wow/draenei.jpg  ->  images-src/legacy/wow/03.jpg
+legacy-portfolio/wow/druid.jpg  ->  images-src/legacy/wow/04.jpg
+legacy-portfolio/wow/hunter.jpg  ->  images-src/legacy/wow/05.jpg
+legacy-portfolio/wow/mage.jpg  ->  images-src/legacy/wow/06.jpg
+legacy-portfolio/wow/orc.jpg  ->  images-src/legacy/wow/07.jpg
+legacy-portfolio/wow/paladin.jpg  ->  images-src/legacy/wow/08.jpg
+legacy-portfolio/wow/priest.jpg  ->  images-src/legacy/wow/09.jpg
+legacy-portfolio/wow/rogue.jpg  ->  images-src/legacy/wow/10.jpg
+legacy-portfolio/wow/shaman.jpg  ->  images-src/legacy/wow/11.jpg
+legacy-portfolio/wow/tauren.jpg  ->  images-src/legacy/wow/12.jpg
+legacy-portfolio/wow/troll.jpg  ->  images-src/legacy/wow/13.jpg
+legacy-portfolio/wow/undead.jpg  ->  images-src/legacy/wow/14.jpg
+legacy-portfolio/wow/warlock.jpg  ->  images-src/legacy/wow/15.jpg
+legacy-portfolio/wow/warrior.jpg  ->  images-src/legacy/wow/16.jpg
+diy/bedroom1-closet/01.jpg  ->  images-src/diy/bedroom-closet-1/01.jpg
+diy/bedroom1-closet/02.jpg  ->  images-src/diy/bedroom-closet-1/02.jpg
+diy/bedroom1-closet/03.JPG  ->  images-src/diy/bedroom-closet-1/03.jpg
+diy/bedroom1-closet/04.JPG  ->  images-src/diy/bedroom-closet-1/04.jpg
+diy/bedroom2-closet/01.jpg  ->  images-src/diy/bedroom-closet-2/01.jpg
+diy/bedroom2-closet/02.jpg  ->  images-src/diy/bedroom-closet-2/02.jpg
+diy/bedroom2-closet/03.jpg  ->  images-src/diy/bedroom-closet-2/03.jpg
+diy/bedroom2-closet/04.JPG  ->  images-src/diy/bedroom-closet-2/04.jpg
+diy/pantry/01.JPG  ->  images-src/diy/pantry/01.jpg
+diy/pantry/02.JPG  ->  images-src/diy/pantry/02.jpg
+diy/pantry/03.jpg  ->  images-src/diy/pantry/03.jpg
+diy/pantry/04.jpg  ->  images-src/diy/pantry/04.jpg
+diy/pantry/05.MOV  ->  images-src/diy/pantry/05.mov
+diy/powder-room/01.PNG  ->  images-src/diy/powder-room/01.png
+diy/powder-room/02.PNG  ->  images-src/diy/powder-room/02.png
+diy/powder-room/03.jpg  ->  images-src/diy/powder-room/03.jpg
+diy/powder-room/04.jpg  ->  images-src/diy/powder-room/04.jpg
+diy/powder-room/05.JPG  ->  images-src/diy/powder-room/05.jpg
+diy/powder-room/06.JPG  ->  images-src/diy/powder-room/06.jpg
+diy/powder-room/07.JPG  ->  images-src/diy/powder-room/07.jpg
+diy/powder-room/08.JPG  ->  images-src/diy/powder-room/08.jpg

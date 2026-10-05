@@ -1,0 +1,63 @@
+@use '../../styles' as *;
+
+.root {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--border);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 16px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+  transition: color 0.15s;
+
+  @include from(md) {
+    grid-template-columns: 48px minmax(0, 1fr) auto;
+  }
+
+  .idx {
+    @include mono(12px);
+    color: var(--accent);
+  }
+
+  .text {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .label {
+    font-size: 20px;
+    font-weight: 500;
+
+    @include from(md) {
+      font-size: 22px;
+    }
+  }
+
+  .description {
+    font-size: 14px;
+    color: var(--muted);
+  }
+
+  .arrow {
+    @include mono(14px);
+    color: var(--subtle);
+    transition: color 0.15s;
+  }
+
+  &:hover,
+  &:focus-visible {
+    color: var(--accent);
+
+    .arrow {
+      color: var(--accent);
+    }
+  }
+}

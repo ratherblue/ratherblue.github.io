@@ -1,0 +1,122 @@
+@use 'index' as *;
+
+:root {
+  --font-sans: 'Geist', Helvetica, Arial, sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, monospace;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-pill: 999px;
+  --page-max: 1120px;
+  --page-pad: 20px;
+  --thumb-hover-border: #5aaef0;
+
+  // Lightbox stays dark in both themes.
+  --lightbox-bg: rgba(5, 9, 16, 0.94);
+  --lightbox-surface: #13213a;
+  --lightbox-border: #24344f;
+  --lightbox-border-hover: #3e6ea6;
+  --lightbox-text: #a9b6c9;
+
+  @include from(md) {
+    --page-pad: 32px;
+  }
+
+  @include from(lg) {
+    --page-pad: 48px;
+  }
+}
+
+:root,
+[data-theme='dark'] {
+  color-scheme: dark;
+  --chrome: rgba(14, 24, 40, 0.85);
+  --bg: #0a1220;
+  --text: #e6ecf4;
+  --secondary: #a9b6c9;
+  --muted: #8a98ae;
+  --caption: #7f8da3;
+  --subtle: #5f7393;
+  --border: #1e2c42;
+  --border-strong: #3e6ea6;
+  --accent: #5aaef0;
+  --accent-hover: #8cc8f5;
+  --nav-active: #1a2a44;
+  --stripe-a: #0e1828;
+  --stripe-b: #101c2f;
+  --grid: rgba(120, 160, 220, 0.06);
+  --zoom-tint: rgba(170, 205, 255, 0.14);
+}
+
+[data-theme='light'] {
+  color-scheme: light;
+  --chrome: rgba(255, 255, 255, 0.78);
+  --bg: #f4f6f9;
+  --text: #0e1a2b;
+  --secondary: #3e4e66;
+  --muted: #56667d;
+  --caption: #5f6e84;
+  --subtle: #6b7a90;
+  --border: #b9c5d5;
+  --border-strong: #8fb3dd;
+  --accent: #1f6fc0;
+  --accent-hover: #14569a;
+  --nav-active: #e1e9f4;
+  --stripe-a: #e9edf3;
+  --stripe-b: #e2e7ef;
+  --grid: rgba(30, 60, 110, 0.07);
+  --zoom-tint: rgba(31, 111, 192, 0.12);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+p,
+figure {
+  margin: 0;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+
+  &:hover {
+    color: var(--accent-hover);
+  }
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,16 @@
+@use '../../styles' as *;
+
+.root {
+  @include mono(12px);
+  align-self: flex-start;
+  padding: 4px 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  color: var(--muted);
+
+  &[data-variant='soon'] {
+    border-style: dashed;
+    border-color: var(--border-strong);
+    color: var(--accent);
+  }
+}

@@ -1,0 +1,21 @@
+@use '../../styles' as *;
+
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+
+  @include from(md) {
+    gap: 48px;
+  }
+
+  .list {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+
+    @include from(md) {
+      gap: 56px;
+    }
+  }
+}

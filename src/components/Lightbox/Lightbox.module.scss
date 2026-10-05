@@ -1,0 +1,123 @@
+@use '../../styles' as *;
+
+.root {
+  // Dark scrollbars on the always-dark viewer.
+  color-scheme: dark;
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  background: var(--lightbox-bg);
+  color: var(--lightbox-text);
+}
+
+.bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 20px;
+
+  .position {
+    @include mono(12px);
+  }
+
+  .actions {
+    display: flex;
+    gap: 8px;
+  }
+}
+
+.button {
+  padding: 7px 12px;
+  border: 1px solid var(--lightbox-border);
+  border-radius: var(--radius-sm);
+  background: var(--lightbox-surface);
+  color: inherit;
+  font-size: 13px;
+  white-space: nowrap;
+  cursor: pointer;
+
+  &:hover,
+  &:focus-visible {
+    color: inherit;
+    border-color: var(--lightbox-border-hover);
+  }
+}
+
+.stage {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px;
+  padding: 0 8px;
+
+  @include from(md) {
+    gap: 12px;
+    padding: 0 12px;
+  }
+
+  .step {
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--lightbox-border);
+    border-radius: 50%;
+    background: #0e1828;
+    color: inherit;
+    font-size: 18px;
+    cursor: pointer;
+
+    &:hover,
+    &:focus-visible {
+      border-color: var(--lightbox-border-hover);
+    }
+
+    &[data-hidden='true'] {
+      visibility: hidden;
+    }
+  }
+
+  .frame {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    min-width: 0;
+
+    // Full width, scroll vertically. margin: auto centres short images but never clips the top of tall ones.
+    &[data-fit='width'] {
+      align-items: flex-start;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+
+      .image {
+        margin: auto;
+        max-height: none;
+      }
+    }
+  }
+
+  .image {
+    max-width: 100%;
+    max-height: calc(100vh - 160px);
+    object-fit: contain;
+  }
+
+  .placeholder {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    max-height: calc(100vh - 160px);
+    background: repeating-linear-gradient(135deg, #0e1828 0 10px, #101c2f 10px 20px);
+  }
+}
+
+.caption {
+  min-height: 56px;
+  padding: 16px 20px 24px;
+  text-align: center;
+  font-size: 14px;
+}

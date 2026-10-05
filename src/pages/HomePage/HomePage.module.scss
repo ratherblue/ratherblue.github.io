@@ -1,0 +1,59 @@
+@use '../../styles' as *;
+
+.root {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 40px;
+
+  @include from(md) {
+    flex-direction: row;
+    align-items: center;
+    gap: 48px;
+  }
+
+  .copy {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    min-width: 0;
+
+    @include from(md) {
+      flex: 1.3 1 0;
+    }
+  }
+
+  .title {
+    font-size: 38px;
+    font-weight: 500;
+    letter-spacing: -0.035em;
+    line-height: 1.04;
+    text-wrap: balance;
+
+    @include from(md) {
+      font-size: 56px;
+    }
+
+    @include from(lg) {
+      font-size: 68px;
+    }
+  }
+
+  .mark {
+    display: flex;
+    justify-content: center;
+    min-width: 0;
+
+    @include from(md) {
+      flex: 1 1 0;
+    }
+
+    img {
+      width: min(320px, 70vw);
+      height: auto;
+
+      @include from(md) {
+        width: min(460px, 100%);
+      }
+    }
+  }
+}

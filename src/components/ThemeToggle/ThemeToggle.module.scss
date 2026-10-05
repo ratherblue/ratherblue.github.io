@@ -1,0 +1,25 @@
+@use '../../styles' as *;
+
+.root {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  margin-left: 4px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: none;
+  color: var(--muted);
+  cursor: pointer;
+  transition:
+    color 0.15s,
+    border-color 0.15s;
+
+  &:hover,
+  &:focus-visible {
+    color: var(--text);
+    border-color: var(--border-strong);
+  }
+}

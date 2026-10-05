@@ -1,0 +1,58 @@
+@use '../../styles' as *;
+
+.root {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px var(--page-pad);
+  border-bottom: 1px solid var(--border);
+  background: var(--chrome);
+  backdrop-filter: blur(6px);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--text);
+
+  &:hover {
+    color: var(--text);
+  }
+
+  .name {
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+
+  .link {
+    flex: none;
+    padding: 8px 14px;
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    white-space: nowrap;
+    color: var(--muted);
+    transition:
+      color 0.15s,
+      background-color 0.15s;
+
+    &:hover {
+      color: var(--text);
+    }
+
+    &.active {
+      color: var(--text);
+      background: var(--nav-active);
+    }
+  }
+}

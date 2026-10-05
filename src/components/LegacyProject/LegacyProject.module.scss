@@ -1,0 +1,50 @@
+@use '../../styles' as *;
+
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 28px 0;
+  border-top: 1px solid var(--border);
+
+  .meta {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 640px;
+  }
+
+  .heading {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 12px;
+  }
+
+  .idx {
+    @include mono(12px);
+    color: var(--accent);
+  }
+
+  .title {
+    font-size: 18px;
+    font-weight: 500;
+  }
+
+  .year {
+    @include mono(12px);
+    color: var(--caption);
+  }
+
+  .role {
+    font-size: 14px;
+    color: var(--secondary);
+  }
+
+  .description {
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--muted);
+    text-wrap: pretty;
+  }
+}

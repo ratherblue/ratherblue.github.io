@@ -1,0 +1,35 @@
+@use '../../styles' as *;
+
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+
+  .heading {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 16px;
+  }
+
+  .idx {
+    @include mono(12px);
+    color: var(--accent);
+  }
+
+  .name {
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+
+  .writeup {
+    max-width: 640px;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--muted);
+    text-wrap: pretty;
+  }
+}
