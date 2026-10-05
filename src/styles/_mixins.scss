@@ -16,7 +16,11 @@
 
 // Shared striped placeholder used behind empty thumbnails.
 @mixin stripes($size: 10px) {
-  background: repeating-linear-gradient(135deg, var(--stripe-a) 0 $size, var(--stripe-b) $size ($size * 2));
+  background: repeating-linear-gradient(
+    135deg,
+    var(--stripe-a) 0 $size,
+    var(--stripe-b) $size ($size * 2)
+  );
 }
 
 @mixin mono($size: 12px) {

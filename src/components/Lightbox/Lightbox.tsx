@@ -14,7 +14,14 @@ type Props = {
 
 const stop = (e: MouseEvent) => e.stopPropagation();
 
-export default function Lightbox({ shots, index, title, fit, onClose, onStep }: Props) {
+export default function Lightbox({
+  shots,
+  index,
+  title,
+  fit,
+  onClose,
+  onStep,
+}: Props) {
   const closeRef = useRef<HTMLButtonElement>(null);
   const frameRef = useRef<HTMLDivElement>(null);
   const shot = shots[index];
@@ -34,11 +41,18 @@ export default function Lightbox({ shots, index, title, fit, onClose, onStep }: 
       if (e.key === 'ArrowLeft') onStep(-1);
       // Focus sits on Close, so scroll a tall screenshot from the keyboard here.
       const frame = frameRef.current;
-      const scrollKeys: Record<string, number> = { ArrowDown: 80, ArrowUp: -80, PageDown: 0.9, PageUp: -0.9 };
+      const scrollKeys: Record<string, number> = {
+        ArrowDown: 80,
+        ArrowUp: -80,
+        PageDown: 0.9,
+        PageUp: -0.9,
+      };
       if (frame && e.key in scrollKeys) {
         e.preventDefault();
         const amount = scrollKeys[e.key];
-        frame.scrollBy({ top: Math.abs(amount) < 1 ? amount * frame.clientHeight : amount });
+        frame.scrollBy({
+          top: Math.abs(amount) < 1 ? amount * frame.clientHeight : amount,
+        });
       }
     };
     window.addEventListener('keydown', onKey);
@@ -51,18 +65,34 @@ export default function Lightbox({ shots, index, title, fit, onClose, onStep }: 
   }, [onClose, onStep]);
 
   return (
-    <div className={styles.root} role="dialog" aria-modal="true" aria-label="Screenshot viewer" onClick={onClose}>
+    <div
+      className={styles.root}
+      role="dialog"
+      aria-modal="true"
+      aria-label="Screenshot viewer"
+      onClick={onClose}
+    >
       <div className={styles.bar} onClick={stop}>
         <span className={styles.position}>
           {title} — {index + 1} / {shots.length}
         </span>
         <div className={styles.actions}>
           {(shot.video ?? shot.src) && (
-            <a className={styles.button} href={shot.video ?? shot.src} target="_blank" rel="noopener noreferrer">
+            <a
+              className={styles.button}
+              href={shot.video ?? shot.src}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               {shot.video ? 'View video' : 'View image'}
             </a>
           )}
-          <button ref={closeRef} type="button" className={styles.button} onClick={onClose}>
+          <button
+            ref={closeRef}
+            type="button"
+            className={styles.button}
+            onClick={onClose}
+          >
             Close
           </button>
         </div>
@@ -82,7 +112,12 @@ export default function Lightbox({ shots, index, title, fit, onClose, onStep }: 
           ←
         </button>
         {/* Keyed by index so each image starts scrolled to the top. */}
-        <div key={index} ref={frameRef} className={styles.frame} data-fit={shot.video ? 'contain' : fit}>
+        <div
+          key={index}
+          ref={frameRef}
+          className={styles.frame}
+          data-fit={shot.video ? 'contain' : fit}
+        >
           {shot.video ? (
             <video
               key={shot.video}
@@ -97,7 +132,12 @@ export default function Lightbox({ shots, index, title, fit, onClose, onStep }: 
               onClick={stop}
             />
           ) : shot.src ? (
-            <img className={styles.image} src={shot.src} alt={shot.caption ?? ''} onClick={stop} />
+            <img
+              className={styles.image}
+              src={shot.src}
+              alt={shot.caption ?? ''}
+              onClick={stop}
+            />
           ) : (
             <div className={styles.placeholder} onClick={stop} />
           )}

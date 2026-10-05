@@ -19,7 +19,9 @@ export default function SiteHeader() {
             key={link.path}
             to={link.path}
             end={link.path === '/'}
-            className={({ isActive }) => (isActive ? styles.link + ' ' + styles.active : styles.link)}
+            className={({ isActive }) =>
+              isActive ? styles.link + ' ' + styles.active : styles.link
+            }
           >
             {link.label}
           </NavLink>

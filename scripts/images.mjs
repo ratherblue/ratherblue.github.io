@@ -28,12 +28,17 @@ const VIDEO_EXT = new Set(['.mov', '.mp4', '.m4v']);
 const thumbSpecs = {
   portfolio: { width: 1280, height: 800, position: 'top' },
   legacy: { width: 480, height: 270, position: 'top' },
-  diy: { width: 800, height: 450, position: sharp.strategy.attention }
+  diy: { width: 800, height: 450, position: sharp.strategy.attention },
 };
 
 const force = process.argv.includes('--force');
 const isStale = (src, ...outs) =>
-  force || outs.some((out) => !fs.existsSync(out) || fs.statSync(out).mtimeMs < fs.statSync(src).mtimeMs);
+  force ||
+  outs.some(
+    (out) =>
+      !fs.existsSync(out) ||
+      fs.statSync(out).mtimeMs < fs.statSync(src).mtimeMs,
+  );
 
 const has = (cmd) => {
   try {
@@ -45,11 +50,17 @@ const has = (cmd) => {
 };
 
 // Prefer ffmpeg (smaller files); fall back to the encoder built into macOS.
-const videoEncoder = has('ffmpeg') ? 'ffmpeg' : has('avconvert') ? 'avconvert' : null;
+const videoEncoder = has('ffmpeg')
+  ? 'ffmpeg'
+  : has('avconvert')
+    ? 'avconvert'
+    : null;
 
 // maxBuffer: a full-resolution PNG poster on stdout can exceed the 1 MB default.
-const run = (cmd, args) => execFileSync(cmd, args, { stdio: 'pipe', maxBuffer: 64 * 1024 * 1024 });
-const ffmpeg = (args) => run('ffmpeg', ['-hide_banner', '-loglevel', 'error', '-y', ...args]);
+const run = (cmd, args) =>
+  execFileSync(cmd, args, { stdio: 'pipe', maxBuffer: 64 * 1024 * 1024 });
+const ffmpeg = (args) =>
+  run('ffmpeg', ['-hide_banner', '-loglevel', 'error', '-y', ...args]);
 
 // Writes the full-size image and the tile thumbnail. `input` is a path or an image buffer.
 async function writeStills(input, spec, full, thumb) {
@@ -62,7 +73,12 @@ async function writeStills(input, spec, full, thumb) {
     .toFile(full);
   await sharp(input)
     .rotate()
-    .resize({ width: spec.width, height: spec.height, fit: 'cover', position: spec.position })
+    .resize({
+      width: spec.width,
+      height: spec.height,
+      fit: 'cover',
+      position: spec.position,
+    })
     .webp({ quality: 78 })
     .toFile(thumb);
 }
@@ -71,7 +87,15 @@ async function writeStills(input, spec, full, thumb) {
 // and returns a PNG poster frame taken from the encoded file, so it matches what plays.
 function encodeVideo(src, out) {
   if (videoEncoder === 'avconvert') {
-    run('avconvert', ['--source', src, '--preset', 'Preset1280x720', '--output', out, '--replace']);
+    run('avconvert', [
+      '--source',
+      src,
+      '--preset',
+      'Preset1280x720',
+      '--output',
+      out,
+      '--replace',
+    ]);
     // Quick Look renders a frame of the movie; it names the result after the input file.
     const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'poster-'));
     run('qlmanage', ['-t', '-s', String(FULL_MAX_WIDTH), '-o', tmp, out]);
@@ -82,8 +106,10 @@ function encodeVideo(src, out) {
 
   // Phone HDR footage is tone-mapped to SDR so it doesn't look washed out.
   const transfer = run('ffprobe', [
-    ...'-v error -select_streams v:0 -show_entries stream=color_transfer -of csv=p=0'.split(' '),
-    src
+    ...'-v error -select_streams v:0 -show_entries stream=color_transfer -of csv=p=0'.split(
+      ' ',
+    ),
+    src,
   ])
     .toString()
     .trim();
@@ -93,10 +119,18 @@ function encodeVideo(src, out) {
   const scale = `scale='if(gte(iw,ih),min(${VIDEO_MAX_SIDE},iw),-2)':'if(gte(iw,ih),-2,min(${VIDEO_MAX_SIDE},ih))'`;
   ffmpeg([
     ...['-i', src, '-vf', `${toneMap}${scale},format=yuv420p`],
-    ...'-c:v libx264 -preset slow -crf 26 -profile:v high -c:a aac -b:a 96k -movflags +faststart'.split(' '),
-    out
+    ...'-c:v libx264 -preset slow -crf 26 -profile:v high -c:a aac -b:a 96k -movflags +faststart'.split(
+      ' ',
+    ),
+    out,
   ]);
-  return ffmpeg(['-ss', String(POSTER_AT_SECONDS), '-i', out, ...'-frames:v 1 -f image2pipe -c:v png -'.split(' ')]);
+  return ffmpeg([
+    '-ss',
+    String(POSTER_AT_SECONDS),
+    '-i',
+    out,
+    ...'-frames:v 1 -f image2pipe -c:v png -'.split(' '),
+  ]);
 }
 
 let built = 0;
@@ -119,7 +153,13 @@ for (const section of fs.readdirSync(SRC)) {
       const src = path.join(dir, file);
       const base = path.join(OUT, section, project, path.parse(file).name);
       const full = base + '.webp';
-      const thumb = path.join(OUT, section, project, 'thumbs', path.parse(file).name + '.webp');
+      const thumb = path.join(
+        OUT,
+        section,
+        project,
+        'thumbs',
+        path.parse(file).name + '.webp',
+      );
 
       if (isImage) {
         if (!isStale(src, full, thumb)) {
@@ -129,7 +169,9 @@ for (const section of fs.readdirSync(SRC)) {
         await writeStills(src, spec, full, thumb);
       } else {
         if (!videoEncoder) {
-          console.warn(`images: skipping ${src} (install ffmpeg to build videos)`);
+          console.warn(
+            `images: skipping ${src} (install ffmpeg to build videos)`,
+          );
           continue;
         }
         const mp4 = base + '.mp4';

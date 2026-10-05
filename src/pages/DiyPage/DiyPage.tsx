@@ -6,7 +6,10 @@ import styles from './DiyPage.module.scss';
 export default function DiyPage() {
   return (
     <section className={styles.root}>
-      <PageIntro eyebrow="03 — DIY projects" title="Building things, on screen and off">
+      <PageIntro
+        eyebrow="03 — DIY projects"
+        title="Building things, on screen and off"
+      >
         Good design doesn't stop at <code>git push</code>
       </PageIntro>
       <div className={styles.list}>

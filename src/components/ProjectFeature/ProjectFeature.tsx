@@ -28,7 +28,9 @@ export default function ProjectFeature({ project }: { project: Project }) {
             ))}
           </div>
         )}
-        {project.status === 'live' && project.url && <TextLink href={project.url}>View site</TextLink>}
+        {project.status === 'live' && project.url && (
+          <TextLink href={project.url}>View site</TextLink>
+        )}
         {project.status === 'soon' && <Tag variant="soon">Coming soon</Tag>}
       </div>
     </article>

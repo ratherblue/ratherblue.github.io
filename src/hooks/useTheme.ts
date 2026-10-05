@@ -14,11 +14,14 @@ const readStored = (): Theme | null => {
   }
 };
 
-const systemTheme = (): Theme => (window.matchMedia(query).matches ? 'light' : 'dark');
+const systemTheme = (): Theme =>
+  window.matchMedia(query).matches ? 'light' : 'dark';
 
 // Defaults to the OS preference; an explicit toggle is persisted and wins from then on.
 export function useTheme() {
-  const [theme, setTheme] = useState<Theme>(() => readStored() ?? systemTheme());
+  const [theme, setTheme] = useState<Theme>(
+    () => readStored() ?? systemTheme(),
+  );
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme;

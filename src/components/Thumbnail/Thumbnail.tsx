@@ -10,7 +10,13 @@ type Props = {
   onOpen: () => void;
 };
 
-export default function Thumbnail({ shot, size = 'md', ratio = 'wide', showCaption = true, onOpen }: Props) {
+export default function Thumbnail({
+  shot,
+  size = 'md',
+  ratio = 'wide',
+  showCaption = true,
+  onOpen,
+}: Props) {
   const tileSrc = shot.thumb ?? shot.src;
   const isVideo = Boolean(shot.video);
   const Icon = isVideo ? Play : Search;
@@ -24,14 +30,21 @@ export default function Thumbnail({ shot, size = 'md', ratio = 'wide', showCapti
         data-ratio={ratio}
         data-media={isVideo ? 'video' : 'image'}
         onClick={onOpen}
-        aria-label={(isVideo ? 'Play ' : 'Enlarge ') + (shot.caption ?? (isVideo ? 'video' : 'screenshot'))}
+        aria-label={
+          (isVideo ? 'Play ' : 'Enlarge ') +
+          (shot.caption ?? (isVideo ? 'video' : 'screenshot'))
+        }
       >
-        {tileSrc && <img className={styles.image} src={tileSrc} alt="" loading="lazy" />}
+        {tileSrc && (
+          <img className={styles.image} src={tileSrc} alt="" loading="lazy" />
+        )}
         <span className={styles.zoom} aria-hidden="true">
           <Icon className={styles.zoomIcon} />
         </span>
       </button>
-      {showCaption && shot.caption && <figcaption className={styles.caption}>{shot.caption}</figcaption>}
+      {showCaption && shot.caption && (
+        <figcaption className={styles.caption}>{shot.caption}</figcaption>
+      )}
     </figure>
   );
 }

@@ -5,6 +5,6 @@ export default defineConfig({
   plugins: [react()],
   css: {
     modules: { localsConvention: 'camelCaseOnly' },
-    preprocessorOptions: { scss: { api: 'modern-compiler' } }
-  }
+    preprocessorOptions: { scss: { api: 'modern-compiler' } },
+  },
 });
