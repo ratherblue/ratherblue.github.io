@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom';
-import type { PageLink } from '../../data/content';
-import styles from './PageLinkList.module.scss';
+import { Link } from 'react-router-dom'
+import type { PageLink } from '../../data/content'
+import styles from './PageLinkList.module.scss'
 
 export default function PageLinkList({ links }: { links: PageLink[] }) {
   return (
@@ -20,5 +20,5 @@ export default function PageLinkList({ links }: { links: PageLink[] }) {
         </li>
       ))}
     </ul>
-  );
+  )
 }

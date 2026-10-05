@@ -1,9 +1,9 @@
-import { Link, NavLink } from 'react-router-dom';
-import { pages } from '../../data/content';
-import ThemeToggle from '../ThemeToggle/ThemeToggle';
-import styles from './SiteHeader.module.scss';
+import { Link, NavLink } from 'react-router-dom'
+import { pages } from '../../data/content'
+import ThemeToggle from '../ThemeToggle/ThemeToggle'
+import styles from './SiteHeader.module.scss'
 
-const links = [{ path: '/', label: 'Home' }, ...pages];
+const links = [{ path: '/', label: 'Home' }, ...pages]
 
 // Intentionally not sticky/fixed.
 export default function SiteHeader() {
@@ -19,9 +19,7 @@ export default function SiteHeader() {
             key={link.path}
             to={link.path}
             end={link.path === '/'}
-            className={({ isActive }) =>
-              isActive ? styles.link + ' ' + styles.active : styles.link
-            }
+            className={({ isActive }) => (isActive ? styles.link + ' ' + styles.active : styles.link)}
           >
             {link.label}
           </NavLink>
@@ -29,5 +27,5 @@ export default function SiteHeader() {
         <ThemeToggle />
       </nav>
     </header>
-  );
+  )
 }

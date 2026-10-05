@@ -1,9 +1,9 @@
-import { Route, Routes } from 'react-router-dom';
-import Layout from './components/Layout/Layout';
-import HomePage from './pages/HomePage/HomePage';
-import PortfolioPage from './pages/PortfolioPage/PortfolioPage';
-import LegacyPage from './pages/LegacyPage/LegacyPage';
-import DiyPage from './pages/DiyPage/DiyPage';
+import { Route, Routes } from 'react-router-dom'
+import Layout from './components/Layout/Layout'
+import HomePage from './pages/HomePage/HomePage'
+import PortfolioPage from './pages/PortfolioPage/PortfolioPage'
+import LegacyPage from './pages/LegacyPage/LegacyPage'
+import DiyPage from './pages/DiyPage/DiyPage'
 
 export default function App() {
   return (
@@ -15,5 +15,5 @@ export default function App() {
         <Route path="diy" element={<DiyPage />} />
       </Route>
     </Routes>
-  );
+  )
 }

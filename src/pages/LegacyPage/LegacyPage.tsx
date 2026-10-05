@@ -1,7 +1,7 @@
-import PageIntro from '../../components/PageIntro/PageIntro';
-import LegacyProject from '../../components/LegacyProject/LegacyProject';
-import { legacyProjects } from '../../data/content';
-import styles from './LegacyPage.module.scss';
+import PageIntro from '../../components/PageIntro/PageIntro'
+import LegacyProject from '../../components/LegacyProject/LegacyProject'
+import { legacyProjects } from '../../data/content'
+import styles from './LegacyPage.module.scss'
 
 export default function LegacyPage() {
   return (
@@ -15,5 +15,5 @@ export default function LegacyPage() {
         ))}
       </div>
     </section>
-  );
+  )
 }

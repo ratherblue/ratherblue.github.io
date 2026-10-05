@@ -1,68 +1,64 @@
 export type Shot = {
-  src?: string; // full-size image, shown in the lightbox
-  thumb?: string; // pre-cropped tile image (see scripts/images.mjs)
-  video?: string; // when set, the lightbox plays this and `src` is its poster frame
-  caption?: string;
-};
+  src?: string // full-size image, shown in the lightbox
+  thumb?: string // pre-cropped tile image (see scripts/images.mjs)
+  video?: string // when set, the lightbox plays this and `src` is its poster frame
+  caption?: string
+}
 
 // Images live in public/images/{dir}/NN.webp with thumbnails in .../thumbs/NN.webp.
 const image = (dir: string, n: number, caption?: string): Shot => {
-  const file = String(n).padStart(2, '0') + '.webp';
+  const file = String(n).padStart(2, '0') + '.webp'
   return {
     src: `/images/${dir}/${file}`,
     thumb: `/images/${dir}/thumbs/${file}`,
     caption,
-  };
-};
+  }
+}
 
 // Videos live in public/images/{dir}/NN.mp4; the script also writes a poster (NN.webp) and its thumbnail.
 const video = (dir: string, n: number, caption?: string): Shot => ({
   ...image(dir, n, caption),
   video: `/images/${dir}/${String(n).padStart(2, '0')}.mp4`,
-});
+})
 
 // Pass captions (one per image, in order) or just a count when there are none.
-const gallery = (
-  dir: string,
-  captions: (string | undefined)[] | number,
-): Shot[] =>
-  (typeof captions === 'number'
-    ? Array.from({ length: captions }, () => undefined)
-    : captions
-  ).map((caption, i) => image(dir, i + 1, caption));
+const gallery = (dir: string, captions: (string | undefined)[] | number): Shot[] =>
+  (typeof captions === 'number' ? Array.from({ length: captions }, () => undefined) : captions).map((caption, i) =>
+    image(dir, i + 1, caption),
+  )
 
 export type PageLink = {
-  path: string;
-  idx: string;
-  label: string;
-  description: string;
-};
+  path: string
+  idx: string
+  label: string
+  description: string
+}
 
 export type Project = {
-  idx: string;
-  name: string;
-  description: string;
-  stack?: string[];
-  url?: string;
-  status: 'live' | 'soon';
-  shots: Shot[]; // the first is the tile; the lightbox steps through all of them
-};
+  idx: string
+  name: string
+  description: string
+  stack?: string[]
+  url?: string
+  status: 'live' | 'soon'
+  shots: Shot[] // the first is the tile; the lightbox steps through all of them
+}
 
 export type LegacyProject = {
-  idx: string;
-  title: string;
-  year: string;
-  role: string;
-  description: string;
-  shots: Shot[];
-};
+  idx: string
+  title: string
+  year: string
+  role: string
+  description: string
+  shots: Shot[]
+}
 
 export type DiyProject = {
-  idx: string;
-  name: string;
-  writeup: string;
-  shots: Shot[];
-};
+  idx: string
+  name: string
+  writeup: string
+  shots: Shot[]
+}
 
 export const pages: PageLink[] = [
   {
@@ -83,7 +79,7 @@ export const pages: PageLink[] = [
     label: 'DIY projects',
     description: 'Pantry, closets, and a powder room',
   },
-];
+]
 
 // TODO(content): descriptions, stack, URLs and screenshots are placeholders.
 export const projects: Project[] = [
@@ -106,8 +102,7 @@ export const projects: Project[] = [
   {
     idx: '01.3',
     name: 'Nullwave',
-    description:
-      'Claude design POC, just an homage to the old flash sites popular in the early 200s',
+    description: 'Claude design POC, just an homage to the old flash sites popular in the early 200s',
     stack: ['Astro'],
     url: 'https://ratherblue.com/nullwave/',
     status: 'live',
@@ -122,19 +117,17 @@ export const projects: Project[] = [
     url: 'https://allocate.co/',
     shots: gallery('portfolio/allocate', ['Dashboard', 'Detail panel']),
   },
-];
+]
 
 // Toggle which metadata lines render on every legacy project.
 export const legacyDisplay = {
   showYear: true,
   showRole: true,
   showDescription: true,
-};
+}
 
 // TODO(content): unfilled years, roles and descriptions show placeholders.
-type LegacyDetails = Partial<
-  Pick<LegacyProject, 'year' | 'role' | 'description'>
->;
+type LegacyDetails = Partial<Pick<LegacyProject, 'year' | 'role' | 'description'>>
 
 const legacy = (
   title: string,
@@ -147,7 +140,7 @@ const legacy = (
   role,
   description,
   shots: gallery('legacy/' + dir, captions),
-});
+})
 
 export const legacyProjects: LegacyProject[] = [
   legacy('Sourceability', 'sourceability', 12, {
@@ -157,13 +150,7 @@ export const legacyProjects: LegacyProject[] = [
   legacy(
     'loanDepot',
     'loan-depot',
-    [
-      'Pipeline',
-      'Overview',
-      'Dual AUS: LPA settings',
-      '1003: notification',
-      'Finalize',
-    ],
+    ['Pipeline', 'Overview', 'Dual AUS: LPA settings', '1003: notification', 'Finalize'],
     { year: '2018', role: 'Frontend design system and implementation' },
   ),
   legacy('Apache FreeMarker', 'freemarker', 8, {
@@ -193,25 +180,13 @@ export const legacyProjects: LegacyProject[] = [
   legacy(
     'BlizzCon',
     'blizzcon',
-    [
-      'EU regionals',
-      'TW regionals',
-      'TW regionals video archive',
-      'State 1',
-      'State 2',
-      'State 3',
-    ],
+    ['EU regionals', 'TW regionals', 'TW regionals video archive', 'State 1', 'State 2', 'State 3'],
     { year: '2012', role: 'Frontend design system and implementation' },
   ),
-  legacy(
-    'StarCraft II',
-    'sc2',
-    ['Game landing', 'Homepage', 'Media', 'Services landing'],
-    {
-      year: '2010',
-      role: 'Frontend design system and implementation',
-    },
-  ),
+  legacy('StarCraft II', 'sc2', ['Game landing', 'Homepage', 'Media', 'Services landing'], {
+    year: '2010',
+    role: 'Frontend design system and implementation',
+  }),
   legacy(
     'World of Warcraft',
     'wow',
@@ -242,7 +217,7 @@ export const legacyProjects: LegacyProject[] = [
 ]
   // Newest first. The sort is stable, so projects from the same year keep the order they're listed in.
   .sort((a, b) => b.year.localeCompare(a.year))
-  .map((project, i) => ({ idx: String(i + 1).padStart(2, '0'), ...project }));
+  .map((project, i) => ({ idx: String(i + 1).padStart(2, '0'), ...project }))
 
 // TODO(content): write-ups are placeholders.
 export const diyProjects: DiyProject[] = [
@@ -288,11 +263,9 @@ export const diyProjects: DiyProject[] = [
   // Videos are numbered after the photos in the same folder.
   shots: [
     ...gallery('diy/' + dir, captions),
-    ...videos.map((caption, j) =>
-      video('diy/' + dir, captions.length + j + 1, caption),
-    ),
+    ...videos.map((caption, j) => video('diy/' + dir, captions.length + j + 1, caption)),
   ],
-}));
+}))
 
 export const socials = [
   { label: 'GitHub', href: 'https://github.com/ratherblue', icon: 'github' },
@@ -302,4 +275,4 @@ export const socials = [
     icon: 'linkedin',
   },
   { label: 'Email', href: 'mailto:ratherblue@gmail.com', icon: 'mail' },
-] as const;
+] as const

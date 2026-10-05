@@ -111,11 +111,7 @@
     width: 100%;
     aspect-ratio: 16 / 9;
     max-height: calc(100vh - 160px);
-    background: repeating-linear-gradient(
-      135deg,
-      #0e1828 0 10px,
-      #101c2f 10px 20px
-    );
+    background: repeating-linear-gradient(135deg, #0e1828 0 10px, #101c2f 10px 20px);
   }
 }
 

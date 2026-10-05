@@ -1,7 +1,7 @@
-import PageIntro from '../../components/PageIntro/PageIntro';
-import ProjectFeature from '../../components/ProjectFeature/ProjectFeature';
-import { projects } from '../../data/content';
-import styles from './PortfolioPage.module.scss';
+import PageIntro from '../../components/PageIntro/PageIntro'
+import ProjectFeature from '../../components/ProjectFeature/ProjectFeature'
+import { projects } from '../../data/content'
+import styles from './PortfolioPage.module.scss'
 
 export default function PortfolioPage() {
   return (
@@ -13,5 +13,5 @@ export default function PortfolioPage() {
         ))}
       </div>
     </section>
-  );
+  )
 }
