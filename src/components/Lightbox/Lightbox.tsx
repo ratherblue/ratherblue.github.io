@@ -1,3 +1,4 @@
+import { ArrowLeft, ArrowRight } from 'lucide-react'
 import { useEffect, useRef, type MouseEvent } from 'react'
 import type { Shot } from '../../data/content'
 import type { LightboxFit } from './LightboxContext'
@@ -86,7 +87,7 @@ export default function Lightbox({ shots, index, title, fit, onClose, onStep }: 
             onStep(-1)
           }}
         >
-          ←
+          <ArrowLeft size={18} aria-hidden="true" />
         </button>
         {/* Keyed by index so each image starts scrolled to the top. */}
         <div key={index} ref={frameRef} className={styles.frame} data-fit={shot.video ? 'contain' : fit}>
@@ -119,7 +120,7 @@ export default function Lightbox({ shots, index, title, fit, onClose, onStep }: 
             onStep(1)
           }}
         >
-          →
+          <ArrowRight size={18} aria-hidden="true" />
         </button>
       </div>
 

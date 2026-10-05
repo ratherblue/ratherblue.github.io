@@ -62,13 +62,14 @@
   }
 
   .step {
+    display: grid;
+    place-items: center;
     width: 44px;
     height: 44px;
     border: 1px solid var(--lightbox-border);
     border-radius: 50%;
     background: #0e1828;
     color: inherit;
-    font-size: 18px;
     cursor: pointer;
 
     &:hover,

@@ -1,3 +1,4 @@
+import { ArrowRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import type { PageLink } from '../../data/content'
 import styles from './PageLinkList.module.scss'
@@ -13,9 +14,7 @@ export default function PageLinkList({ links }: { links: PageLink[] }) {
               <span className={styles.label}>{link.label}</span>
               <span className={styles.description}>{link.description}</span>
             </span>
-            <span className={styles.arrow} aria-hidden="true">
-              →
-            </span>
+            <ArrowRight className={styles.arrow} size={18} aria-hidden="true" />
           </Link>
         </li>
       ))}

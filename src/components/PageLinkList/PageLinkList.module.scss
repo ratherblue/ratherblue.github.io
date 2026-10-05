@@ -47,7 +47,7 @@
   }
 
   .arrow {
-    @include mono(14px);
+    align-self: center;
     color: var(--subtle);
     transition: color 0.15s;
   }
