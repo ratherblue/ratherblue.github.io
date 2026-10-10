@@ -9,7 +9,6 @@ export default function PageLinkList({ links }: { links: PageLink[] }) {
       {links.map((link) => (
         <li key={link.path}>
           <Link to={link.path} className={styles.row}>
-            <span className={styles.idx}>{link.idx}</span>
             <span className={styles.text}>
               <span className={styles.label}>{link.label}</span>
               <span className={styles.description}>{link.description}</span>

@@ -14,7 +14,6 @@
   .copy {
     display: flex;
     flex-direction: column;
-    gap: 32px;
     min-width: 0;
 
     @include from(md) {
@@ -22,19 +21,25 @@
     }
   }
 
+  .tagline {
+    margin-top: 16px;
+    margin-bottom: 32px;
+    font-style: italic;
+  }
+
   .title {
-    font-size: 38px;
+    font-size: 2rem;
     font-weight: 500;
     letter-spacing: -0.035em;
     line-height: 1.04;
     text-wrap: balance;
 
     @include from(md) {
-      font-size: 56px;
+      font-size: 2rem;
     }
 
     @include from(lg) {
-      font-size: 68px;
+      font-size: 3rem;
     }
   }
 

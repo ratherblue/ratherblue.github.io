@@ -7,7 +7,7 @@ const icons = { github: Github, linkedin: Linkedin, mail: Mail }
 export default function SiteFooter() {
   return (
     <footer className={styles.root}>
-      <span>© {new Date().getFullYear()} ratherblue</span>
+      <span>© {new Date().getFullYear()}</span>
       <ul className={styles.links}>
         {socials.map(({ label, href, icon }) => {
           const Icon = icons[icon]

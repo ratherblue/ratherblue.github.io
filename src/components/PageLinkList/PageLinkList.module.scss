@@ -10,7 +10,7 @@
 
 .row {
   display: grid;
-  grid-template-columns: 40px minmax(0, 1fr) auto;
+  grid-template-columns: minmax(0, 1fr) auto;
   align-items: baseline;
   gap: 16px;
   padding: 20px 0;
@@ -19,7 +19,7 @@
   transition: color 0.15s;
 
   @include from(md) {
-    grid-template-columns: 48px minmax(0, 1fr) auto;
+    grid-template-columns: minmax(0, 1fr) auto;
   }
 
   .idx {
